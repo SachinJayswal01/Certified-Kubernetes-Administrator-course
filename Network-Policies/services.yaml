@@ -1,0 +1,52 @@
+# kubectl exec -it frontend-ff76c4df9-9c8b7 -- bash
+# apt-get update && apt-get install telnet
+# telnet mysql-svc 3306
+# telnet backend-svc 80
+# kubectl exec -it backend-6d486bc67c-9qn6q -- bash
+# curl -v backend-svc:80
+# curl -v mysql-svc:3306
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: frontend
+  name: frontend-svc
+spec:
+  selector:
+    app: frontend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: backend
+  name: backend-svc
+spec:
+  selector:
+    app: backend
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mysql
+  name: mysql-svc
+spec:
+  selector:
+    app: mysql
+  ports:
+  - protocol: TCP
+    port: 3306
+    targetPort: 3306

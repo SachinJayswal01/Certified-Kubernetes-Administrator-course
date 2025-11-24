@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: nginx
+        ports:
+        - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend
+  name: backend
+spec:
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: nginx
+        ports:
+        - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mysql
+  name: mysql
+spec:
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - name: mysql
+        image: mysql:latest
+        env:
+          - name: "MYSQL_USER"
+            value: "mysql"
+          - name: "MYSQL_PASSWORD"
+            value: "mysql"
+          - name: "MYSQL_DATABASE"
+            value: "testdb"
+          - name: "MYSQL_ROOT_PASSWORD"
+            value: "verysecure"
+        ports:
+        - containerPort: 3306
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql

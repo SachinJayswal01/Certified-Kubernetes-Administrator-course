@@ -1,0 +1,25 @@
+# kubectl get netpol
+# kubectl describe netpol db-test
+# kubectl exec -it frontend-ff76c4df9-9c8b7 -- bash
+# telnet mysql-svc 3306
+# telnet backend-svc 80
+# kubectl exec -it backend-6d486bc67c-9qn6q -- bash
+# curl -v backend-svc:80
+# curl -v mysql-svc:3306
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-test
+spec:
+  podSelector:
+    matchLabels:
+      app: mysql
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: backend
+    ports:
+    - port: 3306
