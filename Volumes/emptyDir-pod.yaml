@@ -1,0 +1,28 @@
+# kubectl -n kube-system delete pod -l k8s-app=calico-node
+# kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.31.2/manifests/calico.yaml
+# watch kubectl get pods -l k8s-app=calico-node -A
+# kubectl exec -it redis -- bash
+# cd redis
+# ls -al
+# kubectl delete po redis
+# kubectl apply -f emptyDir-pod.yaml
+# kubectl exec -it redis -- bash
+# cd redis
+# ls -al
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: test-pod
+  name: redis
+spec:
+  containers:
+  - name: redis
+    image: redis
+    volumeMounts:
+    - name: redis-vol
+      mountPath: /data/redis
+  volumes:
+  - name: redis-vol
+    emptyDir: {}
+  

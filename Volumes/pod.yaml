@@ -1,0 +1,20 @@
+# kubectl apply -f pod.yaml
+# kubectl get pod
+# kubectl exec -it nginx-pod -- curl localhost
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: test-pod
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx-pod
+    image: nginx
+    volumeMounts:
+    - name: nginx-volume
+      mountPath: "/usr/share/nginx/html"
+  volumes:
+  - name: nginx-volume
+    persistentVolumeClaim:
+      claimName: test-pvc

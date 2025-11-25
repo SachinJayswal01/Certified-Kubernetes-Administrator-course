@@ -1,0 +1,15 @@
+# kubectl apply -f persistent-volume-claim.yaml
+# kubectl get pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pvc
+  labels:
+    type: pvc
+spec:
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 500Mi

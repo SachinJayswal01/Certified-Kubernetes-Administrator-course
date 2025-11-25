@@ -1,0 +1,19 @@
+# kind create cluster --config=cluster-setup-volume.yaml --name=kind-cluster-with-volume
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+nodes:
+- role: control-plane
+  extraPortMappings:
+  - containerPort: 30001
+    hostPort: 30001
+- role: worker
+  extraMounts:
+  - hostPath: C:\Users\sachi\OneDrive\Documents\Kind-Cluster\Volumes
+    containerPath: /host/volumes
+- role: worker
+  extraMounts:
+  - hostPath: C:\Users\sachi\OneDrive\Documents\Kind-Cluster\Volumes
+    containerPath: /host/volumes
+networking:
+  disableDefaultCNI: true
+  podSubnet: 192.168.0.0/16

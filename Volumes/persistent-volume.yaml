@@ -1,0 +1,17 @@
+# kubectl apply -f persistent-volume.yaml
+# kubectl get pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: test-pv
+  labels:
+    type: pv
+spec:
+  storageClassName: standard
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/host/volumes"
+  
