@@ -1,0 +1,22 @@
+# kubectl apply -f task-29-pod.yaml
+# kubectl get pod
+# kubectl exec -it app -- bash
+# cd /var/app/config/
+# echo "Hiiiii" > hi.txt
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app
+  labels:
+    app: nginx
+spec:
+  volumes:
+  - name: nginx-storage
+    persistentVolumeClaim:
+      claimName: pvc-demo
+  containers:
+  - name: app
+    image: nginx:latest
+    volumeMounts:
+    - name: nginx-storage
+      mountPath: "/var/app/config"

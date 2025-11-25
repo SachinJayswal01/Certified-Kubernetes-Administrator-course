@@ -1,0 +1,15 @@
+# kubectl apply -f task-29-pvc.yaml
+# kubectl get pvc
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-demo
+  labels:
+    type: storage
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 256Mi
+  storageClassName: ""

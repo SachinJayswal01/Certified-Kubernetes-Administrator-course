@@ -1,0 +1,15 @@
+# kubectl apply -f task-29-pv.yaml
+# kubectl get pv
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-demo
+  labels:
+    type: storage
+spec:
+  capacity:
+    storage: 512Mi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/host/volumes"
